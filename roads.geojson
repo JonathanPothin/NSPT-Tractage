@@ -24157,6 +24157,26 @@
         ]
       },
       "id": "way/1447847687"
+    },
+
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "way/34967210",
+        "highway": "living_street",
+        "maxspeed": "20",
+        "name": "Rue de la Victoire",
+        "oneway": "yes"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [4.7703716, 45.7604113],
+          [4.7703802, 45.7604583],
+          [4.7708889, 45.7631853]
+        ]
+      }
     }
+
   ]
 }
