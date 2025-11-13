@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>Tassin – Tractage</title>
+
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      crossorigin="anonymous"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon-32x32.png" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div id="map"></div>
+      <aside class="panel">
+        <h1>Suivi du tractage – Tassin</h1>
+        <div class="muted">
+          Choisis une rue, renseigne le statut, valide.
+        </div>
+
+        <div class="card">
+          <div class="legend">
+            <span><span class="dot red"></span>À faire</span>
+            <span><span class="dot yellow"></span>En cours</span>
+            <span><span class="dot green"></span>Fait</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="search">
+            <input id="search" type="text" placeholder="Rechercher une rue…" />
+            <button class="btn secondary" id="btnSearch">Rechercher</button>
+          </div>
+
+          <label for="rue">Rue</label>
+          <select id="rue"></select>
+
+          <div class="btn-group" style="margin-top: 10px">
+            <button class="btn ghost" id="btnAF">
+              <span class="dot red"></span>À faire
+            </button>
+            <button class="btn ghost" id="btnEC">
+              <span class="dot yellow"></span>En cours
+            </button>
+            <button class="btn" id="btnF">
+              <span class="dot green"></span>Fait
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <label for="statut">Statut</label>
+          <select id="statut">
+            <option>À faire</option>
+            <option>En cours</option>
+            <option>Fait</option>
+          </select>
+
+          <div class="row">
+            <div>
+              <label for="benevole">Bénévole</label>
+              <input id="benevole" type="text" placeholder="Prénom Nom" />
+            </div>
+            <div>
+              <label for="date">Date</label>
+              <input id="date" type="date" />
+            </div>
+          </div>
+
+          <label for="remarques">Remarques</label>
+          <textarea
+            id="remarques"
+            placeholder="Remarques (codes, étages, etc.)"
+          ></textarea>
+
+          <div class="btn-group">
+            <button class="btn" id="btnSave">Valider</button>
+          </div>
+          <div id="msg" class="muted" style="margin-top: 6px">Prêt.</div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Supabase JS -->
+    <script src="https://unpkg.com/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+
+    <!-- JS -->
+    <script src="app.js"></script>
+  </body>
+</html>
