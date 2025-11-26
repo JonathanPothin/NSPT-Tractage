@@ -308,3 +308,41 @@ document.getElementById("btnSave").addEventListener("click", async () => {
   await loadRoads();
   document.getElementById("msg").textContent = "Prêt.";
 })();
+
+// ================== PWA INSTALL BUTTON ==================
+let deferredPrompt = null;
+
+// Le navigateur signale que l'app est installable
+window.addEventListener("beforeinstallprompt", (event) => {
+  // On empêche le popup natif
+  event.preventDefault();
+  deferredPrompt = event;
+
+  const btn = document.getElementById("pwaInstallBtn");
+  if (btn) {
+    btn.classList.remove("hidden");
+  }
+});
+
+// Quand l'utilisateur clique sur le bouton
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("pwaInstallBtn");
+  if (!btn) return;
+
+  btn.addEventListener("click", async () => {
+    if (!deferredPrompt) {
+      // Rien à proposer (déjà installée ou non compatible)
+      btn.classList.add("hidden");
+      return;
+    }
+
+    // Ouvre la boîte de dialogue d'installation
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log("Résultat installation PWA :", outcome);
+
+    // On nettoie et on cache le bouton
+    deferredPrompt = null;
+    btn.classList.add("hidden");
+  });
+});
