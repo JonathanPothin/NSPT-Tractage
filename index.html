@@ -8,8 +8,12 @@
     />
     <title>Tassin – Tractage</title>
 
-    <link rel="manifest" href="manifest.json" />
-    <meta name="theme-color" content="#0b1020" />
+    <link rel="manifest" href="manifest.json">
+
+	<meta name="theme-color" content="#1e40af">
+
+	<link rel="apple-touch-icon" href="icon-192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32X32.png">
     
     <!-- Leaflet CSS -->
     <link
@@ -101,6 +105,11 @@
       </aside>
     </div>
 
+	  <!-- Bouton d'installation PWA -->
+      <div id="installPWA" class="pwa-install hidden">
+        📱 Installer l’application
+      </div>
+
     <!-- Leaflet JS -->
     <script
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -115,20 +124,19 @@
     
         <!-- JS -->
     <script src="app.js"></script>
+	<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./service-worker.js")
+    .then(() => console.log("Service worker installé !"))
+    .catch(err => console.error("Erreur SW :", err));
+}
+</script>
+   
+  </body>
+</html>
+  </body>
+</html>
 
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("./sw.js")
-            .catch((err) => console.error("SW registration failed", err));
-        });
-      }
-    </script>
-  </body>
-</html>
-  </body>
-</html>
 
 
 
