@@ -15,13 +15,16 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   max-width: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   font-size: 16px; /* évite le zoom auto sur les inputs iOS */
+  background: var(--bg);
+  color: var(--txt);
 }
 
 .app {
@@ -43,6 +46,21 @@ html, body {
   flex-direction: column;
 }
 
+/* Logo dans le panneau (évite que la page soit plus large que l'écran) */
+.side-logo {
+  max-width: 70%;
+  height: auto;
+  display: block;
+  margin: 0 0 8px 0;
+}
+
+/* Sur petits écrans, on réduit encore */
+@media (max-width: 600px) {
+  .side-logo {
+    max-width: 60%;
+  }
+}
+
 /* Lien vers l'autre site */
 #externalLink {
   font-size: 15px;
@@ -52,6 +70,8 @@ html, body {
   border-radius: 6px;
   text-decoration: none;
   transition: 0.2s;
+  display: inline-block;
+  margin-bottom: 8px;
 }
 #externalLink:hover {
   background: var(--accent-light);
@@ -128,7 +148,7 @@ input[type="date"] {
   height: 42px;
   line-height: 42px;
   padding: 0 12px;
-  -webkit-appearance: none; /* optionnel mais stabilise iOS */
+  -webkit-appearance: none; /* stabilise iOS */
 }
 
 textarea {
