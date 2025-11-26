@@ -2,28 +2,32 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-   <meta name="viewport"
-        content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
 
     <title>Tassin – Tractage</title>
 
-    <link rel="manifest" href="manifest.json">
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#1e40af" />
 
-	<meta name="theme-color" content="#1e40af">
+    <!-- Icônes -->
+    <link rel="apple-touch-icon" href="icon-192.png" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon-32X32.png"
+    />
 
-	<link rel="apple-touch-icon" href="icon-192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32X32.png">
-    
     <!-- Leaflet CSS -->
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
       crossorigin="anonymous"
     />
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="192x192" href="favicon-32X32.png">
-    <link rel="apple-touch-icon" href="favicon-32X32.png">
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
@@ -32,18 +36,34 @@
     <div class="app">
       <div id="map"></div>
       <aside class="panel">
-        
- <img 
-      src="https://unnouveausoufflepourtassin.fr/wp-content/uploads/2025/10/site-construction.webp"
-      alt="NSPT"
-      class="brand-logo"
-    />
+        <a href="#!/up">
+          <img
+            class="side-logo"
+            fetchpriority="high"
+            width="567"
+            height="204"
+            src="https://unnouveausoufflepourtassin.fr/wp-content/uploads/2025/10/site-construction.webp"
+            alt=""
+            srcset="
+              https://unnouveausoufflepourtassin.fr/wp-content/uploads/2025/10/site-construction.webp          567w,
+              https://unnouveausoufflepourtassin.fr/wp-content/uploads/2025/10/site-construction-300x108.webp 300w
+            "
+            sizes="(max-width: 567px) 100vw, 567px"
+          />
+        </a>
+
         <div class="muted">
           Choisis une rue, renseigne le statut, valide.
         </div>
-        <a id="externalLink" href="https://jonathanpothin.github.io/NSPT-AGENDA/" target="_blank">
+
+        <a
+          id="externalLink"
+          href="https://jonathanpothin.github.io/NSPT-AGENDA/"
+          target="_blank"
+        >
           📄 Agenda NSPT
         </a>
+
         <div class="card">
           <div class="legend">
             <span><span class="dot red"></span>À faire</span>
@@ -107,10 +127,10 @@
       </aside>
     </div>
 
-	  <!-- Bouton d'installation PWA -->
-      <div id="installPWA" class="pwa-install hidden">
-        📱 Installer l’application
-      </div>
+    <!-- Bouton d'installation PWA -->
+    <div id="installPWA" class="pwa-install hidden">
+      📱 Installer l’application
+    </div>
 
     <!-- Leaflet JS -->
     <script
@@ -123,20 +143,15 @@
 
     <!-- JS -->
     <script src="app.js"></script>
-    
-	<script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./service-worker.js")
-    .then(() => console.log("Service worker installé !"))
-    .catch(err => console.error("Erreur SW :", err));
-}
-</script>
-   
+
+    <!-- Service worker -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("./service-worker.js")
+          .then(() => console.log("Service worker installé !"))
+          .catch((err) => console.error("Erreur SW :", err));
+      }
+    </script>
   </body>
 </html>
-
-
-
-
-
-
