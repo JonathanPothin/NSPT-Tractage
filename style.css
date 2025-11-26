@@ -43,6 +43,20 @@ body {
   flex-direction: column;
 }
 
+/* Lien vers l'autre site */
+#externalLink {
+  font-size: 15px;
+  background: var(--accent);
+  color: white;
+  padding: 7px 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+#externalLink:hover {
+  background: var(--accent-light);
+}
+
 h1 {
   margin: 0;
   font-size: 18px;
