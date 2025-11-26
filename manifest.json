@@ -1,10 +1,12 @@
 {
   "name": "Un nouveau souffle pour Tassin",
   "short_name": "Tractage NSPT",
-  "start_url": "./",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
-  "background_color": "#0b1020",
-  "theme_color": "#0b1020",
+  "background_color": "#f7f2e8",
+  "theme_color": "#1e40af",
+  "description": "Tractage NSPT",
   "icons": [
     {
       "src": "icon-192.png",
