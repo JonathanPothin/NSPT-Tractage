@@ -38,7 +38,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Fetch : stratégie cache-d’abord pour nos fichiers locaux
+Fetch : stratégie cache-d’abord pour nos fichiers locaux
 self.addEventListener("fetch", (event) => {
   const req = event.request;
 
