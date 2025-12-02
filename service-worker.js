@@ -7,7 +7,7 @@ const OFFLINE_ASSETS = [
   "./style.css",
   "./app.js",
   "./roads.geojson",
-  "./favicon-32X32.png",
+  "./favicon-32.png",
   "./icon-192.png",
   "./manifest.json",
 ];
