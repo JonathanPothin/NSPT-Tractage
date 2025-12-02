@@ -15,7 +15,7 @@
   let featuresIndex = {}; // key(normalisée) -> {layer, feature, name}
   let statusIndex = {}; // "NomRue" -> {statut,benevole,date,remarques}
 
-   --- Utils ---
+   //--- Utils ---
 
   function normName(s) {
     return (s || "")
