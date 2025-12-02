@@ -1,5 +1,8 @@
+self.addEventListener("install", () => self.skipWaiting());
+self.addEventListener("activate", () => self.clients.claim());
+
 // service-worker.js
-const CACHE_NAME = "nspt-tractage-v4";
+const CACHE_NAME = "nspt-tractage-v5";
 
 const OFFLINE_ASSETS = [
   "./",
