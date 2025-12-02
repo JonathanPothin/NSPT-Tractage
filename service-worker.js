@@ -1,5 +1,5 @@
 // service-worker.js
-const CACHE_NAME = "nspt-tractage-v3";
+const CACHE_NAME = "nspt-tractage-v4";
 
 const OFFLINE_ASSETS = [
   "./",
@@ -38,7 +38,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-Fetch : stratégie cache-d’abord pour nos fichiers locaux
+//Fetch : stratégie cache-d’abord pour nos fichiers locaux
 self.addEventListener("fetch", (event) => {
   const req = event.request;
 
