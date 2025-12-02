@@ -1,8 +1,7 @@
-self.addEventListener("install", () => self.skipWaiting());
-self.addEventListener("activate", () => self.clients.claim());
-
 // service-worker.js
-const CACHE_NAME = "nspt-tractage-v5";
+
+// ↑ change juste la version quand tu veux forcer une mise à jour
+const CACHE_NAME = "nspt-tractage-v6";
 
 const OFFLINE_ASSETS = [
   "./",
@@ -12,23 +11,24 @@ const OFFLINE_ASSETS = [
   "./roads.geojson",
   "./favicon-32.png",
   "./icon-192.png",
-  "./manifest.json",
+  "./manifest.json"
 ];
 
-// Install : on met juste en cache nos fichiers *du même domaine*.
-// Surtout pas les CDN Leaflet / Supabase, c’est ça qui fait planter.
+// INSTALL : on pré-cache uniquement les fichiers hébergés sur ton GitHub Pages
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => cache.addAll(OFFLINE_ASSETS))
       .catch((err) => {
-        // On log l’erreur mais on n’empêche pas l’install
         console.error("[SW] cache.addAll failed:", err);
       })
   );
+
+  // le nouveau service worker s’active immédiatement
+  self.skipWaiting();
 });
 
-// Activate : on nettoie les vieux caches
+// ACTIVATE : on supprime les anciens caches et on prend le contrôle des clients
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
@@ -39,13 +39,18 @@ self.addEventListener("activate", (event) => {
       )
     )
   );
+
+  // contrôle immédiat des pages déjà ouvertes
+  return self.clients.claim();
 });
 
-//Fetch : stratégie cache-d’abord pour nos fichiers locaux
+// FETCH :
+// - on ne gère que les requêtes GET
+// - uniquement sur le même domaine (pas les CDN Supabase / Leaflet)
+// - stratégie : cache d’abord, sinon réseau
 self.addEventListener("fetch", (event) => {
   const req = event.request;
 
-  // On ne s’occupe que des GET, et que du même origin (ton GitHub Pages)
   if (req.method !== "GET") return;
   if (!req.url.startsWith(self.location.origin)) return;
 
