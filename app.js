@@ -296,9 +296,10 @@
       await saveStatus(name, statut, benevole, date, remarques);
       msg.textContent = "✅ Sauvegardé.";
     } catch (e) {
-      console.error(e);
-      msg.textContent = "⚠️ Erreur (policies/clé ?)";
-    }
+  console.error("Erreur saveStatus:", e);
+  msg.textContent = "⚠️ Erreur d’enregistrement.";
+  alert("Erreur d’enregistrement : " + (e.message || JSON.stringify(e)));
+}
   });
 
   // --- Init globale ---
