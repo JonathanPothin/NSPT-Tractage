@@ -156,8 +156,16 @@
   // --- Supabase (sans SQL) ---
 
   function initSupabase() {
+  // Storage en mémoire : Tractage ne lit PAS localStorage -> pas de session héritée d’Agenda
+  const memoryStorage = {
+    getItem: () => null,
+    setItem: () => {},
+    removeItem: () => {},
+  };
+
   sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     auth: {
+      storage: memoryStorage,
       persistSession: false,
       autoRefreshToken: false,
       detectSessionInUrl: false,
@@ -313,12 +321,12 @@
 (async function () {
   initSupabase();
 
-  // 🔒 Force Tractage en "public/anon" même si une autre app a une session
-  try {
-    await sb.auth.signOut();
-  } catch (e) {
-    // ignore (au cas où)
-  }
+  // Nettoyage "local" (au cas où)
+  try { await sb.auth.signOut({ scope: "local" }); } catch {}
+
+  // Debug (optionnel)
+  const { data: { user } } = await sb.auth.getUser();
+  console.log("TRACTAGE user =", user); // doit être null
 
   await loadStatuses();
   await loadRoads();
