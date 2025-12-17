@@ -156,8 +156,14 @@
   // --- Supabase (sans SQL) ---
 
   function initSupabase() {
-    sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  }
+  sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+      detectSessionInUrl: false,
+    },
+  });
+}
 
   async function loadStatuses() {
     const { data, error } = await sb.from(TABLE).select("*");
@@ -304,12 +310,20 @@
 
   // --- Init globale ---
 
-  (async function () {
-    initSupabase();
-    await loadStatuses();
-    await loadRoads();
-    document.getElementById("msg").textContent = "Prêt.";
-  })();
+(async function () {
+  initSupabase();
+
+  // 🔒 Force Tractage en "public/anon" même si une autre app a une session
+  try {
+    await sb.auth.signOut();
+  } catch (e) {
+    // ignore (au cas où)
+  }
+
+  await loadStatuses();
+  await loadRoads();
+  document.getElementById("msg").textContent = "Prêt.";
+})();
 
   // ================== PWA INSTALL BUTTON ==================
   let deferredPrompt = null;
